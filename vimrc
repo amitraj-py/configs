@@ -40,9 +40,33 @@ set undodir=~/.vim/undo//
 
 
 
+
+
+" java
+au BufNewFile,BufRead *.java set tabstop=2 shiftwidth=2 expandtab
+
+" python: PEP 8 indentation
+au BufNewFile,BufRead *.py set tabstop=4 shiftwidth=4 expandtab
+autocmd FileType python nnoremap <C-i> :!isort %<CR><CR>
+
+
 " monokai-tasty
 let g:vim_monokai_tasty_italic=1
 colorscheme vim-monokai-tasty
+set termguicolors
+
+
+" Golang; https://github.com/golang/tools/blob/master/gopls/doc/vim.md
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+let g:go_highlight_functions = 1
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+
+autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
+
+" golang autocomplete on inserting dot
+au filetype go inoremap <buffer> . .<C-x><C-o>
 
 
 
