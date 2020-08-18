@@ -1,4 +1,4 @@
-authtoken: 1PoriWbhh6pVr8d4c7MSue9Fwgd_2rruPXN1mj7PJQjUjTTZW
+authtoken: token
 tunnels:
   platform:
     addr: 8000
