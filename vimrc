@@ -80,6 +80,24 @@ nmap <C-m> :TagbarToggle<CR>
 let g:tagbar_autoclose=1
 let g:tagbar_autofocus=1
 
+" Add ctags patterns from https://github.com/romainl/ctags-patterns-for-javascript
+let g:tagbar_type_javascript = {
+      \ 'ctagstype': 'javascript',
+      \ 'kinds': [
+      \ 'A:arrays',
+      \ 'P:properties',
+      \ 'T:tags',
+      \ 'O:objects',
+      \ 'G:generator functions',
+      \ 'F:functions',
+      \ 'C:constructors/classes',
+      \ 'M:methods',
+      \ 'V:variables',
+      \ 'I:imports',
+      \ 'E:exports',
+      \ 'S:styled components'
+      \ ]}
+
 
 " ALE
 nmap <C-a> :ALEToggle<CR>
