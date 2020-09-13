@@ -114,6 +114,7 @@ nnoremap gk gt
 " Tabs swap
 nmap Gj :tabm -1<CR>
 nmap Gk :tabm +1<CR>
+let NERDTreeIgnore = ['__pycache__']
 
 
 
