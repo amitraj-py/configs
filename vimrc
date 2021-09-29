@@ -15,7 +15,7 @@ set hlsearch
 set ignorecase
 
 set t_Co=256
-set colorcolumn=80
+set colorcolumn=90
 set encoding=utf-8
 
 set pastetoggle=<F3>
@@ -25,21 +25,30 @@ vnoremap <C-k> "+y
 let mapleader=","
 
 
+nnoremap <leader>; A;<Esc>
+
 " Enable folding
 set foldmethod=indent
 set foldlevel=99
 nnoremap <Space> za
 
 
-
+" line nos.
+set nu
+set relativenumber
 
 " Saving swap files in seperate directory
 set backupdir=~/.vim/backup//
 set directory=~/.vim/swap//
 set undodir=~/.vim/undo//
 
-
-
+" CSS
+autocmd FileType css,scss set omnifunc=csscomplete#CompleteCSS
+autocmd FileType css,scss
+  \ if &omnifunc != '' |
+  \   call SuperTabChain(&omnifunc, "<c-p>") |
+  \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
+  \ endif
 
 
 " java
@@ -48,6 +57,18 @@ au BufNewFile,BufRead *.java set tabstop=2 shiftwidth=2 expandtab
 " python: PEP 8 indentation
 au BufNewFile,BufRead *.py set tabstop=4 shiftwidth=4 expandtab
 autocmd FileType python nnoremap <C-i> :!isort %<CR><CR>
+autocmd FileType python nnoremap <leader>y :0,$!yapf<Cr><C-o>
+
+" javascript/typescript
+au BufNewFile,BufRead *.ts set tabstop=2 shiftwidth=2 expandtab
+au BufNewFile,BufRead *.js set tabstop=2 shiftwidth=2 expandtab
+
+" css/scss, html
+au BufNewFile,BufRead *.css set tabstop=2 shiftwidth=2 expandtab
+au BufNewFile,BufRead *.scss set tabstop=2 shiftwidth=2 expandtab
+au BufNewFile,BufRead *.html set tabstop=2 shiftwidth=2 expandtab
+
+au BufNewFile,BufRead *.c set tabstop=8 shiftwidth=8 expandtab
 
 
 " monokai-tasty
@@ -57,16 +78,16 @@ set termguicolors
 
 
 " Golang; https://github.com/golang/tools/blob/master/gopls/doc/vim.md
-let g:go_def_mode='gopls'
-let g:go_info_mode='gopls'
-let g:go_highlight_functions = 1
-let g:go_highlight_types = 1
-let g:go_highlight_fields = 1
+" let g:go_def_mode='gopls'
+" let g:go_info_mode='gopls'
+" let g:go_highlight_functions = 1
+" let g:go_highlight_types = 1
+" let g:go_highlight_fields = 1
 
 autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
 
 " golang autocomplete on inserting dot
-au filetype go inoremap <buffer> . .<C-x><C-o>
+" au filetype go inoremap <buffer> . .<C-x><C-o>
 
 
 
@@ -75,33 +96,32 @@ autocmd FileType python setlocal completeopt-=preview
 
 
 
+
 " Tagbar
 nmap <C-m> :TagbarToggle<CR>
 let g:tagbar_autoclose=1
 let g:tagbar_autofocus=1
 
-" Add ctags patterns from https://github.com/romainl/ctags-patterns-for-javascript
-let g:tagbar_type_javascript = {
-      \ 'ctagstype': 'javascript',
-      \ 'kinds': [
-      \ 'A:arrays',
-      \ 'P:properties',
-      \ 'T:tags',
-      \ 'O:objects',
-      \ 'G:generator functions',
-      \ 'F:functions',
-      \ 'C:constructors/classes',
-      \ 'M:methods',
-      \ 'V:variables',
-      \ 'I:imports',
-      \ 'E:exports',
-      \ 'S:styled components'
-      \ ]}
-
-
 " ALE
 nmap <C-a> :ALEToggle<CR>
+let g:ale_completion_enabled=1
+nmap <silent> <leader>aj :ALENext<cr>
+nmap <silent> <leader>ak :ALEPrevious<cr>
+nmap <silent> <leader>f :ALEFix<cr>
 
+let g:ale_linters = {
+\   'rust': ['analyzer'],
+\   'python': ['flake8'],
+\}
+
+let g:ale_fixers = {
+\   'python': ['black'],
+\   'go': ['gofmt'],
+\}
+
+" let g:ale_fix_on_save = 1
+
+" let g:ale_completion_autoimport=1
 
 
 "NERDTree
@@ -129,6 +149,8 @@ let g:NERDSpaceDelims = 1
 
 
 
+
+
 " lightline
 set laststatus=2
 set noshowmode
@@ -143,6 +165,14 @@ let g:lightline = {
       \ },
       \ }
 
+
+
+" rustfmt
+" let g:rustfmt_autosave = 1 
+
+" set completeopt=menu,menuone,preview,noselect,noinsert
+" set completeopt=menu,menuone,popup,noselect,noinsert
+set completeopt=menu,menuone,popup
 
 " Put these lines at the very end of your vimrc file.
 
