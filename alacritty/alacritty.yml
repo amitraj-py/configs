@@ -1,0 +1,13 @@
+import:
+  # - ~/.config/alacritty/dracula.yml
+  # - ~/.config/alacritty/gruvbox_dark.yml
+  - ~/.config/alacritty/gruvbox_material.yml
+
+scrolling:
+  history: 3000
+
+font:
+  normal:
+    family: Source Code Pro
+    style: semibold
+  size: 10.0 
